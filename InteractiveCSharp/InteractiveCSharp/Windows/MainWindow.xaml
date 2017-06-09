@@ -1,0 +1,22 @@
+﻿<Window x:Class="InteractiveCSharp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InteractiveCSharp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+    <Grid Width="500" Height="300">
+        <Button Content="Готово" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="74" Margin="204,0,222,22" Click="Button_Click"/>
+        <Label x:Name="head" Content="Здравствуйте! Введите свои данные и выберите режим работы." Margin="72,65,64,0" VerticalAlignment="Top" Width="364" HorizontalAlignment="Center"/>
+        <TextBox x:Name="FirstName" HorizontalAlignment="Center" Height="18" Margin="182,104,198,178" TextWrapping="Wrap" Text="First name" VerticalAlignment="Center" Width="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="SecondName" HorizontalAlignment="Center" Height="24" Margin="182,127,198,149" TextWrapping="Wrap" Text="Second Name" VerticalAlignment="Center" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <RadioButton Content="Аттестация - 1" HorizontalAlignment="Left" Margin="191,177,0,0" VerticalAlignment="Top" GroupName="mode" Checked="RadioButton_Checked"/>
+        <RadioButton Content="Обучение" HorizontalAlignment="Left" Margin="191,162,0,0" VerticalAlignment="Top" GroupName="mode" Checked="RadioButton_Checked"/>
+        <RadioButton Content="Аттестация - 2" HorizontalAlignment="Left" Margin="191,192,0,0" VerticalAlignment="Top" GroupName="mode" Checked="RadioButton_Checked"/>
+        <RadioButton Content="Экзамен" HorizontalAlignment="Left" Margin="191,207,0,0" VerticalAlignment="Top" GroupName="mode" Checked="RadioButton_Checked"/>
+        <TextBox x:Name="NumberOfTests" HorizontalAlignment="Left" Height="26" Margin="359,227,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="34" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+        <Label x:Name="TestLabel" Content="Количество заданий в Аттестации/Экзамене" HorizontalAlignment="Left" Margin="100,227,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+
+    </Grid>
+</Window>

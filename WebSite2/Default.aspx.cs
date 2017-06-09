@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.IO;
 using System.Diagnostics;
+using System.Linq;
 
-namespace tutor
+namespace Diplom
 {
     public partial class Default : Page
     {
+
         public static List<String> allSolv = new List<String>();
         bool coincidence, compilationError;
         byte checkerResult;
+        string problem= @"G:\OneDrive\Dipl\data\Chapter1\a+b problem";
+
         protected void cmdSubmit_Click(object sender, EventArgs e)
         {
+            Response.Redirect("StartPage.html");
             string data = "";
             coincidence = false;
             compilationError = false;
@@ -57,7 +62,7 @@ namespace tutor
                         compileCSC.WaitForExit();
                         if (!compilationError)
                         {
-                            checkerResult = checker("333 33", "366");
+                            checkerResult = Checkers.Check(problem);
                             switch (checkerResult)
                             {
                                 case 0:
@@ -79,32 +84,7 @@ namespace tutor
                 }
             }
         }
-        byte checker(string input, string output) // возврат 0 - удачно; 1 - неверный ответ; 2 - превышено время ожидания
-        {
-            var compiledFile = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = @"Text.exe",
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    RedirectStandardInput = true,
-                    CreateNoWindow = true
-
-                }
-            };
-            compiledFile.Start();
-            compiledFile.StandardInput.WriteLine(input);
-            bool waitCheck = compiledFile.WaitForExit(1000);
-            if (!waitCheck)
-            {
-                compiledFile.Kill();
-                return 2;
-            }
-            if (compiledFile.StandardOutput.ReadLine() == output)
-                return 0;
-            return 1;
-        }
+        
     }
 }
 /*
@@ -114,7 +94,7 @@ using System;
         static void Main(string[] args)
         {
             string[] tokens = Console.ReadLine().Split(' ');
-            Console.WriteLine(int.Parse(tokens[0]) - int.Parse(tokens[1]));
+            Console.WriteLine(int.Parse(tokens[0]) + int.Parse(tokens[1]));
         }
     }
 */

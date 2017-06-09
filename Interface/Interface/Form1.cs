@@ -44,6 +44,7 @@ namespace Interface
             {
                 int randomValue = random.Next(1000, 2110);
                 while ((randomValue == 1897) || (randomValue == 1898) || (randomValue == 1899)) randomValue = random.Next(1000, 2110);
+                randomValue = 1000;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://acm.timus.ru/problem.aspx?space=1&num=" + randomValue + "&locale=ru");
                 label3.Text = "Номер задачи - " + randomValue;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();

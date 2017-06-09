@@ -1,0 +1,8 @@
+Calculate abc
+Input
+a, b, c
+Output
+a*b*c
+Example
+input	output
+1 5 5	25

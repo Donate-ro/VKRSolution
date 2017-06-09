@@ -1,0 +1,31 @@
+using System;
+
+public class Sum
+{
+    private static void Main()
+    {
+        string[] tokens = Console.ReadLine().Split(' ');
+        Console.WriteLine(int.Parse(tokens[0]) + int.Parse(tokens[1]));
+    }
+}
+using System;
+
+public class Sum
+{
+    private static void Main()
+    {
+        string[] tokens = Console.ReadLine().Split(' ');
+        Console.WriteLine(int.Parse(tokens[0]) + int.Parse(tokens[1]));
+    }
+}
+using System; 
+namespace Lesson1 
+{ 
+	class Program 
+	{ 
+		public static void Main(string[] args) 
+			{ 
+			Console.WriteLine("Hello world!");
+			} 
+	} 
+}

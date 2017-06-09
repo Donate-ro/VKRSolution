@@ -1,0 +1,7 @@
+C:\Users\joke4\OneDrive\Dipl\InteractiveStudy\InteractiveStudy\bin\Debug\InteractiveStudy.exe.config
+G:\OneDrive\Dipl\InteractiveStudy\InteractiveStudy\obj\Debug\InteractiveStudy.csprojResolveAssemblyReference.cache
+G:\OneDrive\Dipl\InteractiveStudy\InteractiveStudy\obj\Debug\Solve.g.cs
+G:\OneDrive\Dipl\InteractiveStudy\InteractiveStudy\obj\Debug\StartPage.g.cs
+G:\OneDrive\Dipl\InteractiveStudy\InteractiveStudy\obj\Debug\App.g.cs
+G:\OneDrive\Dipl\InteractiveStudy\InteractiveStudy\obj\Debug\InteractiveStudy_MarkupCompile.cache
+G:\OneDrive\Dipl\InteractiveStudy\InteractiveStudy\obj\Debug\InteractiveStudy_MarkupCompile.lref

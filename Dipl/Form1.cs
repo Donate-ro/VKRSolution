@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Dipl
@@ -12,103 +13,108 @@ namespace Dipl
             InitializeComponent();
         }
 
-        public delegate void InvokeDelegate();
-        System.Diagnostics.Process CompiledFile = new System.Diagnostics.Process();
-        StreamWriter myStreamWriter;
-        StreamReader myStreamReader;
-        char outputText;
+        public static List<string> allSolv = new List<string>();
+        bool coincidence, compilationError;
+        byte checkerResult;
+        string problem;
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //outputText = '';
             string errText = "";
-            richTextBox3.Text = "";
-            bool error = false;
-            // передача содержимого RichTextBox в файл
-            string[] CodeText = richTextBox1.Text.Split('\n');
-            File.WriteAllLines(@"Text.cs", CodeText);
-            // компиляция файла с кодом
-            System.Diagnostics.Process CompileCSC = new System.Diagnostics.Process();
-            CompileCSC.StartInfo.FileName = @"C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe";
-            CompileCSC.StartInfo.Arguments = @"C:\Users\joke4\OneDrive\Dipl\Dipl\bin\Debug\Text.cs";
-            CompileCSC.StartInfo.UseShellExecute = false;
-            CompileCSC.StartInfo.RedirectStandardOutput = true;
-            CompileCSC.StartInfo.CreateNoWindow = true;
-            CompileCSC.Start();
-            errText = CompileCSC.StandardOutput.ReadToEnd();
-            if (errText.Length > 412) // шапка вывода компилятора, 412 символов
+            string data = "";
+            coincidence = false;
+            compilationError = false;
+            if (!string.IsNullOrWhiteSpace(richTextBox1.Text))
             {
-                richTextBox2.Text = errText.Substring(412);
-                error = true;
+                data = richTextBox1.Text;
+                data = data.Replace(" ", string.Empty);
+                foreach (string s in allSolv)
+                    if (string.Compare(data, s) == 0)
+                    {
+                        coincidence = true;
+                        break;
+                    }
+                //if (CheckForConsidence())
+                {
+                    richTextBox2.Text = "Данные приняты!\n";
+                    allSolv.Add(data);
+                    string[] CodeText = richTextBox1.Text.Split('\n');
+                    File.WriteAllLines(@"Text.cs", CodeText);
+                    // компиляция файла с кодом
+                    Process CompileCSC = CreateCompileProcess();
+                    CompileCSC.Start();
+                    errText = CompileCSC.StandardOutput.ReadToEnd();
+                    if (errText.Length > 412) // шапка вывода компилятора, 412 символов
+                    {
+                        richTextBox2.Text = errText.Substring(412);
+                        compilationError = true;
+                    }
+                    CompileCSC.WaitForExit();
+                    
+                    if (!compilationError)
+                    {
+                        checkerResult = Checkers.Check(problem);
+                        switch (checkerResult)
+                        {
+                            case 0:
+                                richTextBox2.Text += "Решение принято!";
+                                break;
+                            case 1:
+                                richTextBox2.Text += "Ошибка! Неверное решение!";
+                                break;
+                            case 2:
+                                richTextBox2.Text += "Ошибка! Превышено время ожидания результата!";
+                                break;
+                        }
+                        if(checkerResult==0) button2.Enabled = true;
+                    }
+                }
             }
-            CompileCSC.WaitForExit();
-            // проверка на отсутствие ошибок и запуск скомпилированного приложения
-            if (!error)
-            {
-                richTextBox2.Text = "";
-                CompiledFile.Start();
-                checkBox1.Checked = true;
-                myStreamWriter = CompiledFile.StandardInput;
-                myStreamReader = CompiledFile.StandardOutput;
-                new Thread(ThreadRefreshRichTextBox).Start();
-            }
         }
-
-        public void ThreadRefreshRichTextBox()
-        {
-            while (!CompiledFile.StandardOutput.EndOfStream)
-            {
-                outputText = (char)myStreamReader.Read();
-                if ((outputText != '\r') && (outputText != 65535)) richTextBox3.Invoke(new InvokeDelegate(GetText));
-
-            }
-            richTextBox3.Invoke(new InvokeDelegate(ChekBoxFalse));
-
-        }
-
-        public void GetText()
-        {
-            richTextBox3.Text += outputText;
-        }
-
-        public void ChekBoxFalse()
-        {
-            checkBox1.Checked = false;
-        }
-
+        
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox3.Text += textBox1.Text + '\n';
-            myStreamWriter.Write(textBox1.Text);
-            myStreamWriter.Write('\n');
+            richTextBox1.Text = "";
+            richTextBox2.Text = "";
+            richTextBox3.Text = "";
+            button2.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            CompiledFile.StartInfo.FileName = "Text.exe";
-            CompiledFile.StartInfo.UseShellExecute = false;
-            CompiledFile.StartInfo.RedirectStandardInput = true;
-            CompiledFile.StartInfo.RedirectStandardOutput = true;
-            CompiledFile.StartInfo.CreateNoWindow = true;
-
+            Text = "Интерактивный учебник по языку программирования C#";
+            label1.Text = "Проверка решения";
+            label2.Text = "Текст программы";
+            button1.Text = "Отправить";
+            button2.Text = "Далее";
+            button2.Enabled = false;
+            problem = @"C:\Users\joke4\OneDrive\Dipl\data\Chapter1\a+b problem";
+            richTextBox3.Text = File.ReadAllText(problem+"/Problem.txt");
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        bool CheckForConsidence()
         {
-
+            if (!coincidence) return true;
+            else
+            {
+                richTextBox2.Text = "Это решение уже отправлялось на сервер!";
+                return false;
+            }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        Process CreateCompileProcess()
         {
-            if (checkBox1.Checked) CompiledFile.Kill();
-        }
-
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            richTextBox3.Text += textBox1.Text + '\n';
-            myStreamWriter.Write(textBox1.Text);
-            myStreamWriter.Write('\n');
+            return new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = @"C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe",
+                    Arguments = @"C:\Users\joke4\OneDrive\Dipl\Dipl\bin\Debug\Text.cs",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                }
+            };
         }
     }
 }

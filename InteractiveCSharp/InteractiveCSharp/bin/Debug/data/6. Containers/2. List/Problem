@@ -1,0 +1,10 @@
+ћаксимальное и минимальное значение списка
+Input
+a{}
+Output
+min(a), max(a)
+Example
+input	
+{3,7,2}
+output
+7 2

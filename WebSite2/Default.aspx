@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="tutor.Default" validateRequest="false" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Diplom.Default" CodeBehind="App_Code/Checkers.cs" ValidateRequest="false" %>
 
 <!DOCTYPE html>
 
@@ -9,6 +9,17 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <style>
+            label {
+                margin: auto; /* Выравниваем таблицу по центру окна  */
+            }
+
+            table {
+                width: 600px; /* Ширина таблицы */
+                border: 1px solid green; /* Рамка вокруг таблицы */
+                margin: auto; /* Выравниваем таблицу по центру окна  */
+            }
+        </style>
         <table id="table1">
             <tr>
                 <td>Задача
@@ -19,12 +30,12 @@
             <tr>
                 <td>
                     <div>
-                        <asp:TextBox ID="compilationResult" runat="server" Height="226px" TextMode="MultiLine" Width="309px" />
+                        <asp:TextBox ID="compilationResult" runat="server" Height="400px" TextMode="MultiLine" Width="700px" ReadOnly="true" />
                     </div>
                 </td>
                 <td>
                     <div>
-                        <asp:TextBox ID="Code" runat="server" Height="226px" TextMode="MultiLine" Width="417px" />
+                        <asp:TextBox ID="Code" runat="server" Height="400px" TextMode="MultiLine" Width="500px" />
                     </div>
                 </td>
             </tr>
@@ -35,11 +46,16 @@
                     </div>
                 </td>
             </tr>
-        </table>
-        <br />
-                            <div>
+            <tr>
+                <td>
+                    <div>
                         <asp:Label ID="Label1" runat="server" />
                     </div>
+                </td>
+            </tr>
+        </table>
+        <br />
+
     </form>
 </body>
 </html>

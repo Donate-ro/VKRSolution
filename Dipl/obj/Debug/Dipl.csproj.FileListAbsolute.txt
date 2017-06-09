@@ -16,3 +16,12 @@ C:\Users\joke4\OneDrive\Dipl\Dipl\obj\Debug\Dipl.csprojResolveAssemblyReference.
 C:\Users\joke4\OneDrive\Dipl\Dipl\obj\Debug\Dipl.Form1.resources
 C:\Users\joke4\OneDrive\Dipl\Dipl\obj\Debug\Dipl.Properties.Resources.resources
 C:\Users\joke4\OneDrive\Dipl\Dipl\obj\Debug\Dipl.csproj.GenerateResource.Cache
+C:\Users\joke4_000\OneDrive\Dipl\Dipl\bin\Debug\Dipl.exe.config
+C:\Users\joke4_000\OneDrive\Dipl\Dipl\bin\Debug\Dipl.exe
+C:\Users\joke4_000\OneDrive\Dipl\Dipl\bin\Debug\Dipl.pdb
+C:\Users\joke4_000\OneDrive\Dipl\Dipl\obj\Debug\Dipl.csprojResolveAssemblyReference.cache
+C:\Users\joke4_000\OneDrive\Dipl\Dipl\obj\Debug\Dipl.Form1.resources
+C:\Users\joke4_000\OneDrive\Dipl\Dipl\obj\Debug\Dipl.Properties.Resources.resources
+C:\Users\joke4_000\OneDrive\Dipl\Dipl\obj\Debug\Dipl.csproj.GenerateResource.Cache
+C:\Users\joke4_000\OneDrive\Dipl\Dipl\obj\Debug\Dipl.exe
+C:\Users\joke4_000\OneDrive\Dipl\Dipl\obj\Debug\Dipl.pdb
